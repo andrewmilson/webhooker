@@ -9,6 +9,6 @@ Dependencies
 Install Instructions
 ====================
 ```
-npm install
-node --harmony app.js > /dev/null 2>&1 &
+sudo npm install -g webhooker
+webhooker --config config.json
 ```
