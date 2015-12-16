@@ -1,7 +1,7 @@
 {
   "name": "webhooker",
   "author": "Andrew Milson",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "app.js",
   "repository": {
     "type": "git",
@@ -11,14 +11,9 @@
     "webhooker": "app.js"
   },
   "scripts": {
-    "start": "node --harmony app.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/andrewmilson/webhooker.git"
+    "start": "node app.js"
   },
   "dependencies": {
-    "koa": "^1.1.2",
-    "koa-router": "^5.3.0"
+    "express": "^4.13.3"
   }
 }
