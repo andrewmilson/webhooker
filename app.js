@@ -10,7 +10,7 @@ var configFile = require(configPath);
 configFile.forEach(function(config) {
   app.get('/hooks/' + config.id, function(req, res) {
     console.log("Received webhook:", config.id)
-    exec(config['execute-command'], (err, stdout, stderr) => {
+    exec(config.exec, (err, stdout, stderr) => {
       if (err) throw err;
       console.log(stdout, stderr);
     });
