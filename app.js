@@ -2,13 +2,17 @@
 
 var express = require('express');
 var app = express();
+
+var portIndex = process.argv.indexOf('--port')
+var port = ~portIndex ? process.argv[portIndex + 1] : 9000;
+
 var path = require("path");
 var configPath = path.join(process.cwd(), process.argv[
   process.argv.indexOf('--config') + 1])
 var configFile = require(configPath);
 
 configFile.forEach(function(config) {
-  app.get('/hooks/' + config.id, function(req, res) {
+  app.post('/hooks/' + config.id, function(req, res) {
     console.log("Received webhook:", config.id)
     exec(config.exec, (err, stdout, stderr) => {
       if (err) throw err;
@@ -17,7 +21,7 @@ configFile.forEach(function(config) {
   })
 });
 
-app.listen(9909);
+app.listen(port);
 console.log("Listening for webhooks on:\n" +
   configFile.map(config => ' + ' +
-  'http://localhost:9000/hooks/' + config.id).join('\n'))
+  'http://localhost:' + port + '/hooks/' + config.id).join('\n'))
