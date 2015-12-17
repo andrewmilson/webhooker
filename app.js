@@ -1,13 +1,15 @@
 #!/usr/bin/env node
 
-var express = require('express')
-var app = express()
-var configFile = require(process.argv[
-  process.argv.indexOf('--config') + 1]);
+var express = require('express');
+var app = express();
+var path = require("path");
+var configPath = path.join(process.cwd(), process.argv[
+  process.argv.indexOf('--config') + 1])
+var configFile = require(configPath);
 
 configFile.forEach(function(config) {
   app.get('/hooks/' + config.id, function(req, res) {
-    console.log("YOW")
+    console.log("Received webhook:", config.id)
     exec(config['execute-command'], (err, stdout, stderr) => {
       if (err) throw err;
       console.log(stdout, stderr);
@@ -15,7 +17,7 @@ configFile.forEach(function(config) {
   })
 });
 
-app.listen(9909)
-console.log("Listening for webhooks on:" +
-  configFile.map(config => '\n + ' +
-  'http://localhost:9000/hooks/' + config.id))
+app.listen(9909);
+console.log("Listening for webhooks on:\n" +
+  configFile.map(config => ' + ' +
+  'http://localhost:9000/hooks/' + config.id).join('\n'))

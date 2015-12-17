@@ -1,17 +1,21 @@
-About
+USAGE
 =====
 
-Recieves webhooks from Dockerhub to rebuild docker containers on the host with the latest image from Dockerhub.
-
-Dependencies
-============
-
-+ Node >= 0.12
-
-Install Instructions
-====================
 
 ```
-sudo npm install -g webhooker
-webhooker --config config.json
+[
+  {
+    "id": "restart-docker-container",
+    "exec": "sh restart-docker-container.sh"
+  },
+  {
+    "id": "test-webhook",
+    "exec": "sh script.sh"
+  }
+]
+```
+
+```
+$ sudo npm install -g webhooker
+$ webhooker --config confing.json
 ```
