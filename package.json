@@ -1,7 +1,7 @@
 {
   "name": "webhooker",
   "author": "Andrew Milson",
-  "version": "3.0.5",
+  "version": "4.0.0",
   "main": "app.js",
   "repository": {
     "type": "git",
