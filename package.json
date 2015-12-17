@@ -1,7 +1,7 @@
 {
   "name": "webhooker",
   "author": "Andrew Milson",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "main": "app.js",
   "repository": {
     "type": "git",
@@ -14,6 +14,7 @@
     "start": "node app.js"
   },
   "dependencies": {
+    "exec": "^0.2.1",
     "express": "^4.13.3"
   }
 }
