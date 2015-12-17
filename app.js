@@ -2,6 +2,7 @@
 
 var express = require('express');
 var app = express();
+var exec = require('child_process');
 
 var portIndex = process.argv.indexOf('--port')
 var port = ~portIndex ? process.argv[portIndex + 1] : 9000;
@@ -14,7 +15,8 @@ var configFile = require(configPath);
 configFile.forEach(function(config) {
   app.post('/hooks/' + config.id, function(req, res) {
     console.log("Received webhook:", config.id)
-    exec(config.cmd, function(err, stdout, stderr) {
+    exec.execFile(config.cmd, {cwd: path.dirname(configPath)},
+    function(err, stdout, stderr) {
       if (err) throw err;
       console.log(stdout, stderr);
     });
