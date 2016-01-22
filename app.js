@@ -15,15 +15,16 @@ var configFile = require(configPath);
 
 configFile.forEach(function(config) {
   app.post('/hooks/' + config.id, function(req, res) {
-    console.log("Received webhook:", config.id)
-
-    process.nextTick(() =>
+    process.nextTick(() => {
       exec.exec(config.cmd, [], {cwd: configDir},
       function(err, stdout, stderr) {
         if (err) throw err;
         console.log(stdout, stderr);
       });
     });
+
+    console.log("Received webhook:", config.id)
+    res.send(JSON.stringify({success: true}))
   })
 });
 
